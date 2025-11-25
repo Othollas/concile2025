@@ -71,3 +71,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+input[type=number] {
+  -moz-appearance: textfield;
+}

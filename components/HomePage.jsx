@@ -14,7 +14,7 @@ export default function HomePage({ onStart }) {
         </div>
         <button
           onClick={onStart}
-          className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-4 rounded-full text-lg transition-all duration-300 hover:scale-105 shadow-lg"
+          className="  animate-[bounce_2s_ease-in-out_infinite] bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-4 rounded-full text-lg transition-all duration-300 hover:scale-105 shadow-lg hover:animate-none "
         >
           Commencer à voter
         </button>
