@@ -48,7 +48,7 @@ export default function PseudoPage({ onSubmit, existingUsers, onLoginExisting, o
       setCode(generatedCode);
       const phoneNumber = `+33${Number(telNumber)}`;
 
-      // sendSMS(phoneNumber, generatedCode);
+      sendSMS(phoneNumber, generatedCode);
 
       setShowCode(true);
     }
@@ -195,7 +195,7 @@ export default function PseudoPage({ onSubmit, existingUsers, onLoginExisting, o
               <h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">Code de vérification</h2>
               <p className="text-gray-600 mb-6 text-center">
                 Votre code a été envoyé par SMS<br />
-                <span className="text-sm text-gray-500">(Demo: {code})</span>
+               {/* <span className="text-sm text-gray-500">(Demo: {code})</span> */}
               </p>
               <input
                 type="text"
