@@ -42,13 +42,13 @@ export default function RestaurantVotePage({ pseudo, participants, onVote, exist
                 <div className="text-xl font-semibold text-gray-800">{restaurant.name}</div>
                 <div className="text-sm text-orange-500 font-medium mt-1">{restaurant.priceRange}</div>
               </button>
-              
+           
               <button
                 onClick={() => setDetailsRestaurant(restaurant)}
-                className="absolute top-3 right-3 bg-white hover:bg-orange-50 rounded-full p-2 shadow-md transition-all duration-300 hover:scale-110 opacity-0 group-hover:opacity-100"
+                className="absolute top-3 right-3 bg-white hover:bg-orange-50 rounded-full p-2 shadow-md transition-all duration-300 hover:scale-110  group-hover:opacity-100 animate-ping2 sd:opacity-100"
                 title="Voir les détails"
               >
-                <Info size={20} className="text-orange-500" />
+                <Info size={20} className="text-orange-500 " />
               </button>
             </div>
           ))}

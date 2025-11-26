@@ -70,5 +70,4 @@ export async function sendSMS(to, code){
   });
 
   const data = await response.json();
-  console.log(data);
 }

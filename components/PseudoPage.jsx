@@ -10,6 +10,7 @@ export default function PseudoPage({ onSubmit, existingUsers, onLoginExisting, o
   const [selectedUser, setSelectedUser] = useState(null);
   const [enteredCode, setEnteredCode] = useState('');
   const [telNumber, setTelNumber] = useState('');
+  const [errorTel, setErrorTel] = useState(false);
 
   const handleNewUser = () => setMode('new');
 
@@ -54,6 +55,7 @@ export default function PseudoPage({ onSubmit, existingUsers, onLoginExisting, o
     }
   };
 
+
   const handleCodeSubmit = async () => {
 
     try {
@@ -68,8 +70,8 @@ export default function PseudoPage({ onSubmit, existingUsers, onLoginExisting, o
 
       }
     } catch (error) {
-      onToast('Code incorrect !', 'bg-red-500')
-
+      // onToast('Code incorrect !', 'bg-red-500')
+      console.error(error)
     }
   };
 
@@ -174,16 +176,21 @@ export default function PseudoPage({ onSubmit, existingUsers, onLoginExisting, o
                 onKeyPress={(e) => e.key === 'Enter' && handlePseudoSubmit()}
               />
               <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Votre Téléphone</h2>
+              {errorTel && <span className='text-red-500 '>Le numéro doit être de 10 chiffres</span>}
               <input
                 type="number"
                 value={telNumber}
+                max={10}
+                maxLength={10}
                 onChange={(e) => setTelNumber(e.target.value)}
                 placeholder="Entrez votre numéro de téléphone"
                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-orange-500 focus:outline-none transition-colors mb-4 "
                 onKeyPress={(e) => e.key === 'Enter' && handlePseudoSubmit()}
               />
+              
+
               <button
-                onClick={handlePseudoSubmit}
+                onClick={handleCodeSubmit}
                 disabled={!pseudo.trim() || !telNumber}
                 className="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-gray-300 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300 hover:scale-105"
               >
@@ -195,7 +202,7 @@ export default function PseudoPage({ onSubmit, existingUsers, onLoginExisting, o
               <h2 className="text-3xl font-bold text-gray-800 mb-4 text-center">Code de vérification</h2>
               <p className="text-gray-600 mb-6 text-center">
                 Votre code a été envoyé par SMS<br />
-               {/* <span className="text-sm text-gray-500">(Demo: {code})</span> */}
+                {/* <span className="text-sm text-gray-500">(Demo: {code})</span> */}
               </p>
               <input
                 type="text"

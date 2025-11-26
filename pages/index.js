@@ -60,7 +60,7 @@ export default function Home() {
       setCurrentUser(newUser);
       setPage('participants');
     } catch (error) {
-      alert(error.message);
+      handleToast(error.message);
     }
   };
 

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { X, ChevronLeft, ChevronRight, Utensils, MapPin } from 'lucide-react';
-import Image from 'next/image';
+import { X, ChevronLeft, ChevronRight, Utensils, MapPin, Euro } from 'lucide-react';
+// import Image from 'next/image';
 
 export default function RestaurantDetailsModal({ restaurant, onClose }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const apiKey = process.env.NEXT_PUBLIC_MAPS_API_KEY;
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % restaurant.images.length);
@@ -22,6 +24,8 @@ export default function RestaurantDetailsModal({ restaurant, onClose }) {
     };
   }, []);
 
+
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in">
       <div
@@ -32,7 +36,7 @@ export default function RestaurantDetailsModal({ restaurant, onClose }) {
       <div className="relative bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto animate-scale-in">
         <button
           onClick={onClose}
-          className="fixed top-8 right-4 z-10 bg-white hover:bg-gray-100 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110"
+          className="fixed top-8 right-6 z-10 bg-white hover:bg-gray-100 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110"
         >
           <X size={24} className="text-gray-700 " />
         </button>
@@ -40,9 +44,9 @@ export default function RestaurantDetailsModal({ restaurant, onClose }) {
         <div className="relative h-64 bg-gray-200 overflow-hidden rounded-t-2xl">
           <img
             src={restaurant.images[currentImageIndex]}
-            // width={290}
+
             alt={restaurant.name}
-            fill={true}
+
             className="w-full h-full object-cover"
           />
           {/* Pour utiliser Image, je dois d'abord modifier le remote pattern de next.js */}
@@ -84,12 +88,12 @@ className="w-full h-full object-cover"
             </>
           )}
         </div>
-
+        {console.log(restaurant)}
         <div className="p-6">
           <div className="flex items-start justify-between mb-4">
             <div>
               <div className="flex items-center gap-3 mb-2">
-                <span className="text-5xl">{restaurant.emoji}</span>
+                <span className="text-3xl">{restaurant.emoji}</span>
                 <div>
                   <h2 className="text-3xl font-bold text-gray-800">{restaurant.name}</h2>
                   <div className="text-orange-500 font-semibold text-lg">{restaurant.priceRange}</div>
@@ -98,7 +102,25 @@ className="w-full h-full object-cover"
             </div>
           </div>
 
+          <div className="mb-6">
+            <h3 className="text-xl font-semibold text-gray-800 mb-3 flex items-center gap-2"><Euro size={20} /> Prix </h3>
+            <div className="flex flex-wrap gap-2">
+              {restaurant.price.map((price, index) => (
+                <span
+                  key={index}
+                  className="bg-orange-200 text-blue-700 px-4 py-2 rounded-full text-sm font-medium"
+                >
+                  {price}
+                </span>
+              ))}
+            </div>
+          </div>
+
+
+
           <p className="text-gray-600 text-lg mb-6 leading-relaxed">{restaurant.description}</p>
+
+
 
           <div className="mb-6">
             <h3 className="text-xl font-semibold text-gray-800 mb-3 flex items-center gap-2">
@@ -130,7 +152,7 @@ className="w-full h-full object-cover"
                 height="100%"
                 frameBorder="0"
                 style={{ border: 0 }}
-                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${encodeURIComponent(restaurant.address)}&zoom=15`}
+                src={`https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${encodeURIComponent(restaurant.address)}&zoom=15`}
                 allowFullScreen
               />
             </div>
